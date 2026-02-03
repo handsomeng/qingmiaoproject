@@ -97,27 +97,30 @@ h1 {
 /* Scroll Indicator */
 .scroll-indicator {
     position: absolute;
-    bottom: 80px;
-    /* Moved up as requested */
+    bottom: 120px;
+    /* Moved up further to clear the button and safe area */
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 4px;
+    gap: 6px;
     z-index: 10;
     pointer-events: none;
     animation: bounce 2s infinite;
 }
 
 .chevron-arrow {
-    width: 20px;
-    height: 20px;
-    border-right: 2px solid var(--primary);
-    border-bottom: 2px solid var(--primary);
+    width: 24px;
+    height: 24px;
+    border-right: 3px solid var(--primary);
+    border-bottom: 3px solid var(--primary);
     transform: rotate(45deg);
-    opacity: 0.6;
+    opacity: 0.9;
+    /* More visible */
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+    /* Add subtle shadow for contrast */
 }
 
 .chevron-arrow:nth-child(2) {
