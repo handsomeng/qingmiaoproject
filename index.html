@@ -350,24 +350,32 @@
                 document.getElementById('track-5')
             ];
 
-            // Shuffle products
+            // Shuffle products and add one extra to make 50
             const shuffled = [...products].sort(() => Math.random() - 0.5);
+            // Add first product again to make exactly 50 (10 per row)
+            if (shuffled.length < 50) {
+                shuffled.push(shuffled[0]);
+            }
 
-            // Distribute products to tracks
-            shuffled.forEach((product, index) => {
-                const trackIndex = index % 5;
-                const tag = createProductTag(product);
-                tracks[trackIndex].appendChild(tag);
-            });
+            // Distribute 10 products per track
+            for (let i = 0; i < 5; i++) {
+                const start = i * 10;
+                const end = start + 10;
+                const trackProducts = shuffled.slice(start, end);
 
-            // Duplicate for seamless loop using cloneNode to preserve structure
-            tracks.forEach(track => {
-                const children = Array.from(track.children);
+                trackProducts.forEach(product => {
+                    const tag = createProductTag(product);
+                    tracks[i].appendChild(tag);
+                });
+
+                // Duplicate the entire row for seamless infinite loop
+                const children = Array.from(tracks[i].children);
                 children.forEach(child => {
                     const clone = child.cloneNode(true);
-                    track.appendChild(clone);
+                    tracks[i].appendChild(clone);
                 });
-            });
+            }
+
 
             // Use event delegation for clicks on barrage container
             document.getElementById('barrage-container').addEventListener('click', function (e) {
