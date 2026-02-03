@@ -70,7 +70,7 @@ body {
     color: var(--primary);
     padding: 6px 16px;
     border-radius: 100px;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     display: inline-block;
     margin-bottom: 20px;
@@ -79,10 +79,10 @@ body {
 }
 
 h1 {
-    font-size: 48px;
+    font-size: 36px;
     font-weight: 800;
     line-height: 1.1;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     background: var(--accent-gradient);
     -webkit-background-clip: text;
     background-clip: text;
@@ -90,15 +90,15 @@ h1 {
 }
 
 .hero-sub {
-    font-size: 18px;
+    font-size: 16px;
     color: var(--text-dim);
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     max-width: 90%;
 }
 
 /* Mechanism Section */
 .section-title {
-    font-size: 28px;
+    font-size: 24px;
     font-weight: 700;
     margin-bottom: 24px;
     text-align: center;
@@ -120,7 +120,7 @@ h1 {
 }
 
 .card-title {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     margin-bottom: 12px;
     display: flex;
@@ -133,7 +133,7 @@ h1 {
 }
 
 .price-tag {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: 800;
     color: var(--primary);
     margin: 10px 0;
@@ -359,13 +359,13 @@ h1 {
 .btn {
     display: block;
     width: 100%;
-    padding: 18px;
+    padding: 16px;
     border-radius: 100px;
     background: var(--accent-gradient);
     color: #000;
     text-align: center;
     font-weight: 700;
-    font-size: 18px;
+    font-size: 16px;
     text-decoration: none;
     box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
     transition: transform 0.2s;
