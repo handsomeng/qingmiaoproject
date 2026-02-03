@@ -33,6 +33,8 @@ body {
     max-width: 1200px;
     /* Expanded for desktop */
     margin: 0 auto;
+    padding-bottom: 120px;
+    /* Base padding for mobile CTA */
 }
 
 /* Mobile-first constraint for specific sections if needed */
@@ -166,7 +168,6 @@ h1 {
 /* About Section */
 .about-me {
     margin-top: 60px;
-    padding-bottom: 120px;
 }
 
 .avatar-group {
@@ -473,6 +474,11 @@ h1 {
 
     .gallery-wide {
         grid-column: span 2;
+    }
+
+    .container {
+        padding-bottom: 160px;
+        /* More space for desktop CTA */
     }
 
     .cta-container {
