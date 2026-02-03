@@ -360,10 +360,23 @@
                 tracks[trackIndex].appendChild(tag);
             });
 
-            // Duplicate for seamless loop
+            // Duplicate for seamless loop using cloneNode to preserve structure
             tracks.forEach(track => {
-                const items = track.innerHTML;
-                track.innerHTML = items + items;
+                const children = Array.from(track.children);
+                children.forEach(child => {
+                    const clone = child.cloneNode(true);
+                    track.appendChild(clone);
+                });
+            });
+
+            // Use event delegation for clicks on barrage container
+            document.getElementById('barrage-container').addEventListener('click', function (e) {
+                const tag = e.target.closest('.product-tag');
+                if (tag) {
+                    const name = tag.dataset.name;
+                    const desc = tag.dataset.desc;
+                    selectProduct({ name, desc }, tag);
+                }
             });
         }
 
@@ -373,10 +386,9 @@
             tag.innerHTML = `<span class="tag-name">${product.name}</span>`;
             tag.dataset.name = product.name;
             tag.dataset.desc = product.desc;
-
-            tag.addEventListener('click', () => selectProduct(product, tag));
             return tag;
         }
+
 
         function selectProduct(product, tagElement) {
             // Check if already selected
