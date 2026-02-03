@@ -180,11 +180,79 @@
     <div class="modal-overlay" id="modal">
         <div class="modal-content">
             <span class="close-btn" id="close-modal">&times;</span>
-            <div class="modal-title">扫码申请加入</div>
-            <img src="assets/wechat.jpg" alt="郭瀚森微信二维码">
-            <div class="modal-desc">
-                请扫码添加郭瀚森微信<br>
-                备注 <strong>“青苗计划”</strong> 开启你的创造旅程
+
+            <!-- Stage 1: Questions -->
+            <div id="form-stage">
+                <div class="section-title" style="text-align: left; font-size: 24px; margin-bottom: 24px;">申请信息登记</div>
+                <form id="apply-form">
+                    <div class="form-group">
+                        <label>如何称呼你？</label>
+                        <input type="text" name="name" placeholder="你的姓名/昵称" required>
+                    </div>
+                    <div class="form-group">
+                        <label>你在哪个城市？</label>
+                        <input type="text" name="city" placeholder="例如：上海" required>
+                    </div>
+                    <div class="form-group">
+                        <label>你是哪所大学？</label>
+                        <input type="text" name="university" placeholder="例如：复旦大学" required>
+                    </div>
+                    <div class="form-group">
+                        <label>你是什么专业？</label>
+                        <input type="text" name="major" placeholder="你的专业" required>
+                    </div>
+                    <div class="form-group">
+                        <label>你现在几年级？</label>
+                        <select name="grade" required>
+                            <option value="">请选择</option>
+                            <option value="大一">大一</option>
+                            <option value="大二">大二</option>
+                            <option value="大三">大三</option>
+                            <option value="大四">大四</option>
+                            <option value="硕博">硕博</option>
+                            <option value="已毕业/其他">已毕业/其他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>是否使用过 ChatGPT / Gemini / Claude 等？</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="ai_usage" value="经常使用" required>
+                                经常使用</label>
+                            <label class="radio-item"><input type="radio" name="ai_usage" value="偶尔尝试"> 偶尔尝试</label>
+                            <label class="radio-item"><input type="radio" name="ai_usage" value="从未听说/没用过">
+                                从未听说/没用过</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>是否有自己的小红书账号？</label>
+                        <div class="radio-group">
+                            <label class="radio-item"><input type="radio" name="xhs_account" value="有" required>
+                                有</label>
+                            <label class="radio-item"><input type="radio" name="xhs_account" value="没有"> 没有</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>是否有此刻想要做的产品？是什么？（没有也没事）</label>
+                        <textarea name="product_idea" rows="3" placeholder="大胆写下你的想法..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>填写完毕后需要添加郭瀚森微信，确认吗？</label>
+                        <label class="radio-item">
+                            <input type="radio" name="confirm" value="确认" required> 确认
+                        </label>
+                    </div>
+                    <button type="submit" class="submit-btn" id="submit-btn">提交申请并开启创造</button>
+                </form>
+            </div>
+
+            <!-- Stage 2: QR Code -->
+            <div id="qr-stage">
+                <div class="section-title" style="font-size: 24px;">登记成功！</div>
+                <img src="assets/wechat.jpg" alt="郭瀚森微信二维码">
+                <div class="modal-desc" style="text-align: center;">
+                    请务必扫码添加郭瀚森微信<br>
+                    备注 <strong>“青苗计划”</strong> 完成最后的加入
+                </div>
             </div>
         </div>
     </div>
@@ -193,10 +261,16 @@
         const joinBtn = document.getElementById('join-btn');
         const modal = document.getElementById('modal');
         const closeBtn = document.getElementById('close-modal');
+        const applyForm = document.getElementById('apply-form');
+        const formStage = document.getElementById('form-stage');
+        const qrStage = document.getElementById('qr-stage');
+        const submitBtn = document.getElementById('submit-btn');
 
         joinBtn.addEventListener('click', function (e) {
             e.preventDefault();
             modal.style.display = 'flex';
+            formStage.style.display = 'block';
+            qrStage.style.display = 'none';
         });
 
         closeBtn.addEventListener('click', function () {
@@ -206,6 +280,58 @@
         modal.addEventListener('click', function (e) {
             if (e.target === modal) {
                 modal.style.display = 'none';
+            }
+        });
+
+        applyForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(applyForm);
+            const data = Object.fromEntries(formData.entries());
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = '正在提交...';
+
+            // Feishu Webhook Integration
+            const feishuUrl = 'https://open.feishu.cn/open-apis/bot/v2/hook/6905287e-22ef-47f9-b9f3-0fc47fc0a1ad';
+
+            const message = {
+                msg_type: "text",
+                content: {
+                    text: `🚀 新的青苗计划申请：\n\n` +
+                        `👤 姓名：${data.name}\n` +
+                        `📍 城市：${data.city}\n` +
+                        `🏫 大学：${data.university}\n` +
+                        `专业：${data.major}\n` +
+                        `年级：${data.grade}\n` +
+                        `🤖 AI使用：${data.ai_usage}\n` +
+                        `📱 小红书：${data.xhs_account}\n` +
+                        `💡 创意：${data.product_idea || '无'}\n` +
+                        `✅ 微信确认：${data.confirm}`
+                }
+            };
+
+            try {
+                // Using no-cors because Feishu webhook usually doesn't have CORS headers for browsers
+                // Note: with no-cors we won't know if it actually succeeded, but we show QR anyway
+                await fetch(feishuUrl, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(message)
+                });
+
+                // Show QR stage
+                formStage.style.display = 'none';
+                qrStage.style.display = 'block';
+            } catch (error) {
+                console.error('Error submitting to Feishu:', error);
+                // Fallback: still show QR stage even if webhook fails to not block user
+                formStage.style.display = 'none';
+                qrStage.style.display = 'block';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerText = '提交申请并开启创造';
             }
         });
     </script>

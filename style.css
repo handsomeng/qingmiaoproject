@@ -395,50 +395,114 @@ h1 {
     border: 1px solid var(--border);
     padding: 32px;
     border-radius: 32px;
-    text-align: center;
-    max-width: 90%;
+    text-align: left;
+    /* Changed for form alignment */
+    width: 90%;
+    max-width: 450px;
     position: relative;
     animation: zoomIn 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
-@keyframes zoomIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
+.form-step {
+    display: none;
 }
 
-.modal-content img {
-    width: 100%;
-    max-width: 280px;
-    border-radius: 12px;
+.form-step.active {
+    display: block;
+}
+
+.form-group {
     margin-bottom: 20px;
 }
 
-.modal-title {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--primary);
-}
-
-.modal-desc {
+.form-group label {
+    display: block;
     font-size: 14px;
     color: var(--text-dim);
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-main);
+    font-family: inherit;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.radio-group {
+    display: grid;
+    gap: 10px;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.radio-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.radio-item input {
+    width: auto;
+}
+
+#qr-stage {
+    text-align: center;
+    display: none;
+}
+
+#qr-stage img {
+    width: 100%;
+    max-width: 240px;
+    margin-bottom: 20px;
 }
 
 .close-btn {
     position: absolute;
-    top: 16px;
-    right: 16px;
+    top: 20px;
+    right: 20px;
     color: var(--text-dim);
     font-size: 24px;
     cursor: pointer;
+    z-index: 10;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 16px;
+    border-radius: 12px;
+    background: var(--accent-gradient);
+    color: #000;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Responsive Adjustments */
