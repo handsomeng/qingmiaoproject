@@ -1,0 +1,452 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap');
+
+:root {
+    --bg: #030712;
+    --card-bg: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
+    --primary: #a3e635;
+    /* Lime green */
+    --secondary: #22d3ee;
+    /* Cyan */
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --accent-gradient: linear-gradient(135deg, #a3e635 0%, #22d3ee 100%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+.container {
+    padding: 0 24px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.4;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+}
+
+.badge {
+    background: rgba(163, 230, 53, 0.1);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 20px;
+    border: 1px solid rgba(163, 230, 53, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1.1;
+    margin-bottom: 16px;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-bottom: 40px;
+    max-width: 90%;
+}
+
+/* Mechanism Section */
+.section-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 24px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(20px);
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.card-title i {
+    color: var(--primary);
+}
+
+.price-tag {
+    font-size: 32px;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 10px 0;
+}
+
+.refund-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.refund-item {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 16px;
+    border-radius: 16px;
+    text-align: center;
+}
+
+.refund-value {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+.refund-label {
+    font-size: 12px;
+    color: var(--text-dim);
+}
+
+/* About Section */
+.about-me {
+    margin-top: 60px;
+    padding-bottom: 120px;
+}
+
+.avatar-group {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--accent-gradient);
+    padding: 2px;
+}
+
+.avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--bg);
+}
+
+.bio-text {
+    font-size: 15px;
+    color: var(--text-dim);
+}
+
+/* Process Section */
+.process-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 40px;
+}
+
+.process-item {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.process-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--accent-gradient);
+}
+
+.process-day {
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--primary);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    display: block;
+}
+
+.process-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.process-content {
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.process-tag {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 10px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--secondary);
+}
+
+/* Showcase Section */
+.showcase-section {
+    margin-top: 60px;
+}
+
+.category-tag {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.gallery-item {
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 280px;
+    /* Increased height to show more of the long images */
+    object-fit: cover;
+    object-position: top;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.gallery-wide img {
+    height: 240px;
+    /* Slightly taller for wide items */
+}
+
+.gallery-item:active img {
+    transform: scale(1.05);
+}
+
+.gallery-wide {
+    grid-column: span 2;
+}
+
+.gallery-desc {
+    padding: 12px;
+    font-size: 12px;
+    color: var(--text-dim);
+    border-top: 1px solid var(--border);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Changed to 2x2 for 4 items */
+    gap: 12px;
+    margin-bottom: 40px;
+}
+
+.stats-item {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    height: 120px;
+    /* Limit height */
+}
+
+.stats-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* CTA */
+.cta-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 24px;
+    background: linear-gradient(to top, var(--bg) 80%, transparent);
+    z-index: 100;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    border-radius: 100px;
+    background: var(--accent-gradient);
+    color: #000;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+    box-shadow: 0 10px 30px rgba(163, 230, 53, 0.3);
+    transition: transform 0.2s;
+}
+
+.btn:active {
+    transform: scale(0.96);
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    padding: 32px;
+    border-radius: 32px;
+    text-align: center;
+    max-width: 90%;
+    position: relative;
+    animation: zoomIn 0.3s ease;
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-content img {
+    width: 100%;
+    max-width: 280px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--primary);
+}
+
+.modal-desc {
+    font-size: 14px;
+    color: var(--text-dim);
+}
+
+.close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    color: var(--text-dim);
+    font-size: 24px;
+    cursor: pointer;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate {
+    animation: fadeInUp 0.8s ease forwards;
+}
+
+.delay-1 {
+    animation-delay: 0.1s;
+}
+
+.delay-2 {
+    animation-delay: 0.2s;
+}
+
+.delay-3 {
+    animation-delay: 0.3s;
+}
