@@ -66,6 +66,32 @@
             </div>
         </div>
 
+        <!-- Product Discovery Section -->
+        <div class="section-title" style="margin-top: 60px;">发现你的产品</div>
+        <p style="color: var(--text-dim); font-size: 14px; margin-bottom: 24px; text-align: center;">
+            点击你感兴趣的产品，最多选择 3 个
+        </p>
+
+        <div class="barrage-container" id="barrage-container">
+            <div class="barrage-track" id="track-1"></div>
+            <div class="barrage-track" id="track-2"></div>
+            <div class="barrage-track" id="track-3"></div>
+            <div class="barrage-track" id="track-4"></div>
+            <div class="barrage-track" id="track-5"></div>
+        </div>
+
+        <div class="selected-products" id="selected-products">
+            <div class="selected-slot" data-slot="1">
+                <span class="slot-placeholder">点击上方选择</span>
+            </div>
+            <div class="selected-slot" data-slot="2">
+                <span class="slot-placeholder">点击上方选择</span>
+            </div>
+            <div class="selected-slot" data-slot="3">
+                <span class="slot-placeholder">点击上方选择</span>
+            </div>
+        </div>
+
         <div class="section-title" style="margin-top: 60px;">活动参与流程</div>
 
         <div class="process-list">
@@ -258,6 +284,157 @@
     </div>
 
     <script>
+        // Product Data (49 products from the tree structure)
+        const products = [
+            { name: '小红书封面生成器', desc: '输入标题，一键生成高点击率封面' },
+            { name: 'AI 取名工具', desc: '宝宝/品牌/网名一键生成' },
+            { name: '简历优化器', desc: '粘贴简历，AI 润色成大厂风格' },
+            { name: '朋友圈文案生成器', desc: '输入关键词，生成发圈文案' },
+            { name: '论文降重助手', desc: '一键改写段落，降低查重率' },
+            { name: '表情包生成器', desc: '输入文字，自动配图生成表情包' },
+            { name: '情侣头像生成器', desc: '上传照片，生成 CP 感头像' },
+            { name: 'AI 塔罗占卜', desc: '抽牌 + AI 解读，付费小程序' },
+            { name: '星座运势生成器', desc: '每日星座运势自动生成' },
+            { name: '短视频脚本生成器', desc: '输入主题，生成口播脚本' },
+            { name: 'AI 写作助手', desc: '帮别人写小红书/公众号文案' },
+            { name: '面试模拟器', desc: '模拟面试官提问给出建议' },
+            { name: '英语作文批改器', desc: '上传作文，AI 打分修改' },
+            { name: '减肥计划生成器', desc: '输入数据，生成个性化方案' },
+            { name: '旅行攻略生成器', desc: '输入目的地，生成详细行程' },
+            { name: '课程笔记整理器', desc: '粘贴笔记，AI 结构化知识点' },
+            { name: '单词记忆卡生成器', desc: '输入单词，生成带例句卡片' },
+            { name: '论文摘要生成器', desc: '上传论文，一键中英摘要' },
+            { name: '考研真题解析器', desc: '输入题目，AI 详细解题' },
+            { name: '读书笔记生成器', desc: '输入书名，生成结构化笔记' },
+            { name: 'PPT 大纲生成器', desc: '输入主题，生成 PPT 结构' },
+            { name: '周报生成器', desc: '输入本周事项，生成专业周报' },
+            { name: '会议纪要整理器', desc: '粘贴录音文字，生成纪要' },
+            { name: '邮件润色器', desc: '口语化表达改成正式邮件' },
+            { name: '代码注释生成器', desc: '粘贴代码，自动生成中文注释' },
+            { name: 'Excel 公式助手', desc: '描述需求，生成 Excel 公式' },
+            { name: '竞品分析报告生成器', desc: '输入产品名，生成分析框架' },
+            { name: '自我介绍生成器', desc: '输入背景，生成自我介绍' },
+            { name: '面试复盘助手', desc: '记录问题，AI 优化回答' },
+            { name: '行业研究助手', desc: '输入行业，生成概况趋势' },
+            { name: '岗位 JD 解读器', desc: '粘贴 JD，分析核心要求' },
+            { name: '情侣每日问答', desc: '每天生成互动问题' },
+            { name: '好友匿名信箱', desc: '朋友匿名留言你来猜' },
+            { name: '真心话生成器', desc: '聚会用，各种尺度问题' },
+            { name: 'MBTI 深度解读', desc: '输入类型，详细性格分析' },
+            { name: '缘分测试器', desc: '输入名字，趣味缘分分析' },
+            { name: '宿舍关系分析器', desc: '输入室友信息，生成关系图' },
+            { name: 'AI 写诗机', desc: '输入主题，生成古诗/现代诗' },
+            { name: '歌词生成器', desc: '输入情感词，生成原创歌词' },
+            { name: '小说开头生成器', desc: '输入设定，生成吸引开篇' },
+            { name: '梗图生成器', desc: '输入场景，生成配文梗图' },
+            { name: '土味情话生成器', desc: '一键生成各种土味情话' },
+            { name: '骂人不带脏字生成器', desc: '输入对象，高级怼人话术' },
+            { name: 'AA 记账器', desc: '聚餐后快速算清每人付款' },
+            { name: '宿舍值日表生成器', desc: '自动生成公平值日轮换表' },
+            { name: '外卖推荐器', desc: '根据心情/预算推荐吃什么' },
+            { name: '电影推荐器', desc: '输入喜好，推荐今晚电影' },
+            { name: '礼物推荐器', desc: '输入对象预算，推荐礼物' },
+            { name: '每日穿搭助手', desc: '根据天气场合推荐穿搭' }
+        ];
+
+        // Selected products state
+        let selectedProducts = [];
+
+        // Initialize barrage
+        function initBarrage() {
+            const tracks = [
+                document.getElementById('track-1'),
+                document.getElementById('track-2'),
+                document.getElementById('track-3'),
+                document.getElementById('track-4'),
+                document.getElementById('track-5')
+            ];
+
+            // Shuffle products
+            const shuffled = [...products].sort(() => Math.random() - 0.5);
+
+            // Distribute products to tracks
+            shuffled.forEach((product, index) => {
+                const trackIndex = index % 5;
+                const tag = createProductTag(product);
+                tracks[trackIndex].appendChild(tag);
+            });
+
+            // Duplicate for seamless loop
+            tracks.forEach(track => {
+                const items = track.innerHTML;
+                track.innerHTML = items + items;
+            });
+        }
+
+        function createProductTag(product) {
+            const tag = document.createElement('div');
+            tag.className = 'product-tag';
+            tag.innerHTML = `<span class="tag-name">${product.name}</span>`;
+            tag.dataset.name = product.name;
+            tag.dataset.desc = product.desc;
+
+            tag.addEventListener('click', () => selectProduct(product, tag));
+            return tag;
+        }
+
+        function selectProduct(product, tagElement) {
+            // Check if already selected
+            if (selectedProducts.find(p => p.name === product.name)) {
+                return;
+            }
+
+            // Check if slots are full
+            if (selectedProducts.length >= 3) {
+                alert('最多只能选择 3 个产品，请先取消一个已选产品');
+                return;
+            }
+
+            // Add to selected
+            selectedProducts.push(product);
+            tagElement.classList.add('selected');
+
+            // Update slots
+            updateSlots();
+        }
+
+        function updateSlots() {
+            const slots = document.querySelectorAll('.selected-slot');
+
+            slots.forEach((slot, index) => {
+                if (selectedProducts[index]) {
+                    const product = selectedProducts[index];
+                    slot.classList.add('filled');
+                    slot.innerHTML = `
+                        <span class="slot-name">${product.name}</span>
+                        <span class="slot-desc">${product.desc}</span>
+                    `;
+                    slot.onclick = () => removeProduct(index);
+                } else {
+                    slot.classList.remove('filled');
+                    slot.innerHTML = '<span class="slot-placeholder">点击上方选择</span>';
+                    slot.onclick = null;
+                }
+            });
+        }
+
+        function removeProduct(index) {
+            const removed = selectedProducts.splice(index, 1)[0];
+
+            // Remove selected class from tag
+            document.querySelectorAll('.product-tag').forEach(tag => {
+                if (tag.dataset.name === removed.name) {
+                    tag.classList.remove('selected');
+                }
+            });
+
+            updateSlots();
+        }
+
+        // Initialize on load
+        initBarrage();
+
+        // Form handling
         const joinBtn = document.getElementById('join-btn');
         const modal = document.getElementById('modal');
         const closeBtn = document.getElementById('close-modal');
@@ -289,6 +466,9 @@
             const formData = new FormData(applyForm);
             const data = Object.fromEntries(formData.entries());
 
+            // Get selected products
+            const selectedProductNames = selectedProducts.map(p => p.name).join('、') || '未选择';
+
             submitBtn.disabled = true;
             submitBtn.innerText = '正在提交...';
 
@@ -307,13 +487,12 @@
                         `🤖 AI使用：${data.ai_usage}\n` +
                         `📱 小红书：${data.xhs_account}\n` +
                         `💡 创意：${data.product_idea || '无'}\n` +
+                        `🎯 感兴趣的产品：${selectedProductNames}\n` +
                         `✅ 微信确认：${data.confirm}`
                 }
             };
 
             try {
-                // Using no-cors because Feishu webhook usually doesn't have CORS headers for browsers
-                // Note: with no-cors we won't know if it actually succeeded, but we show QR anyway
                 await fetch(feishuUrl, {
                     method: 'POST',
                     mode: 'no-cors',
@@ -321,12 +500,10 @@
                     body: JSON.stringify(message)
                 });
 
-                // Show QR stage
                 formStage.style.display = 'none';
                 qrStage.style.display = 'block';
             } catch (error) {
                 console.error('Error submitting to Feishu:', error);
-                // Fallback: still show QR stage even if webhook fails to not block user
                 formStage.style.display = 'none';
                 qrStage.style.display = 'block';
             } finally {
@@ -335,6 +512,7 @@
             }
         });
     </script>
+
 </body>
 
 </html>

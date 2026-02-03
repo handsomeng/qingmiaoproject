@@ -165,9 +165,159 @@ h1 {
     color: var(--text-dim);
 }
 
+/* Product Discovery Barrage */
+.barrage-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    padding: 20px 0;
+    position: relative;
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.barrage-track {
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+    animation: scroll-left 30s linear infinite;
+    will-change: transform;
+}
+
+.barrage-track:nth-child(2) {
+    animation-duration: 35s;
+    animation-delay: -5s;
+}
+
+.barrage-track:nth-child(3) {
+    animation-duration: 28s;
+    animation-delay: -10s;
+}
+
+.barrage-track:nth-child(4) {
+    animation-duration: 38s;
+    animation-delay: -2s;
+}
+
+.barrage-track:nth-child(5) {
+    animation-duration: 32s;
+    animation-delay: -8s;
+}
+
+@keyframes scroll-left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.product-tag {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 10px 20px;
+    font-size: 13px;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    backdrop-filter: blur(10px);
+}
+
+.product-tag:hover {
+    background: rgba(163, 230, 53, 0.15);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.product-tag.selected {
+    background: var(--accent-gradient);
+    color: #000;
+    font-weight: 600;
+    border-color: transparent;
+}
+
+.product-tag .tag-name {
+    font-weight: 600;
+}
+
+.product-tag .tag-desc {
+    color: var(--text-dim);
+    font-size: 11px;
+}
+
+.product-tag.selected .tag-desc {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+/* Selected Products Area */
+.selected-products {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-top: 24px;
+    padding: 0 24px;
+}
+
+.selected-slot {
+    background: var(--card-bg);
+    border: 2px dashed var(--border);
+    border-radius: 16px;
+    padding: 20px 16px;
+    text-align: center;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.selected-slot.filled {
+    border-style: solid;
+    border-color: var(--primary);
+    background: rgba(163, 230, 53, 0.1);
+}
+
+.selected-slot .slot-placeholder {
+    color: var(--text-dim);
+    font-size: 12px;
+}
+
+.selected-slot .slot-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-main);
+    margin-bottom: 4px;
+}
+
+.selected-slot .slot-desc {
+    font-size: 11px;
+    color: var(--text-dim);
+}
+
+.selected-slot.filled:hover {
+    background: rgba(255, 100, 100, 0.1);
+    border-color: #ff6b6b;
+}
+
+.selected-slot.filled:hover .slot-name::after {
+    content: ' ✕';
+    color: #ff6b6b;
+}
+
 /* About Section */
 .about-me {
     margin-top: 60px;
+
 }
 
 .avatar-group {
